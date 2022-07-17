@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GlobalStyles from "./styles/Global";
@@ -7,6 +8,7 @@ import Contact from "./pages/Contact";
 import Navigation from "./components/Navigation";
 import AddArticle from "./pages/AddArticle";
 import Login from "./pages/Login";
+import Form from "./pages/Form";
 const theme = {
   colors: {
     header: "#ebfbff",
@@ -16,11 +18,32 @@ const theme = {
   mobile: "768px",
 };
 function App() {
+  const [view, setView] = useState(true);
+  const [value, setValue] = useState(true);
+  const handleView = () => {
+    console.log("dvhjjhhj");
+    console.log(view);
+    setView(!view);
+  };
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <Login>Sing Up</Login>
-      <Router>
+      {value ? (
+        <Form func={handleView} />
+      ) : (
+        <Router>
+          <Navigation />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/addArticle" element={<AddArticle />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </Router>
+      )}
+      {/* <Form /> */}
+      {/* <Login>Sing Up</Login> */}
+      {/* <Router>
         <Navigation />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -28,7 +51,7 @@ function App() {
           <Route path="/addArticle" element={<AddArticle />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
-      </Router>
+      </Router> */}
     </ThemeProvider>
   );
 }
