@@ -18,26 +18,26 @@ const theme = {
   mobile: "768px",
 };
 function App() {
-  const [view, setView] = useState(true);
+  const [logout, setLogout] = useState(true);
   const [value, setValue] = useState(true);
-  const handleView = () => {
-    console.log("dvhjjhhj");
-    console.log(view);
-    setView(!view);
+  const handleLogout = () => {
+    console.log(logout);
+    setLogout(!logout);
   };
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       {value ? (
-        <Form func={handleView} />
+        <Form logout={handleLogout} />
       ) : (
         <Router>
           <Navigation />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/addArticle" element={<AddArticle />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/" element={<Form />} />
           </Routes>
         </Router>
       )}

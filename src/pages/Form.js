@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 
-import { app } from "../firebase/index";
-function Form({ func }) {
+function Form() {
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [hasAccount, setHasAccount] = useState(false);
-  //   const { func } = props;
   const clearInputs = () => {
     setEmail("");
     setPassword("");
@@ -22,47 +21,41 @@ function Form({ func }) {
     setEmailError("");
     setPasswordError("");
   };
-
-  const handleLogin = () => {
-    clearErrors();
-    app
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .catch((err) => {
-        switch (err.code) {
-          case "auth/invalid-email":
-          case "auth/user-disabled":
-          case "auth/user-not-found":
-            setEmailError(err.message);
-            break;
-          case "auth/wrong-password":
-            setPasswordError(err.message);
-            break;
-        }
-      });
+  const handleLogin = (e) => {
+    clearInputs();
+    e.preventDefault();
+    signInWithEmailAndPassword(email, password).catch((error) => {
+      switch (error.code) {
+        case "auth/invalid-email":
+        case "auth/user-disabled":
+        case "auth/user-root-found":
+          setEmailError(error.message);
+          break;
+        case "auth/wrong-password":
+          setPasswordError(error.message);
+          break;
+      }
+    });
   };
-  const handleSignup = () => {
+  const handleSignup = (e) => {
     clearErrors();
-    app
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .catch((err) => {
-        switch (err.code) {
-          case "auth/email-already-in-use":
-          case "auth/invalid-email":
-            setEmailError(err.message);
-            break;
-          case "auth/weak-password":
-            setPasswordError(err.message);
-            break;
-        }
-      });
+    createUserWithEmailAndPassword(email, password).catch((error) => {
+      switch (error.code) {
+        case "auth/email-already-in-use":
+        case "auth/invalid-email":
+          setEmailError(error.message);
+          break;
+        case "auth/wrong-password":
+          setPasswordError(error.message);
+          break;
+      }
+    });
   };
   const handleLogout = () => {
-    app.auth().signout();
+    signOut();
   };
   const authListener = () => {
-    app.auth().onAuthStateChanged((user) => {
+    onAuthStateChanged((user) => {
       if (user) {
         clearInputs();
         setUser(user);
@@ -71,12 +64,19 @@ function Form({ func }) {
       }
     });
   };
-  //   useEffect(() => {
-  //     authListener();
-  //   }, []);
+  // useEffect(() => {
+  //   authListener();
+  // }, []);
   return (
     <div>
-      <button onClick={func}>Zaloguj</button>
+      <h1>Sign Up</h1>
+      <form>
+        <label>Email</label>
+        <input type="email" name="email" placeholder="Email" />
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Password" />
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 }

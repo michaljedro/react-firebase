@@ -4,7 +4,7 @@ export const links = [
   {
     id: 1,
     text: "Home",
-    url: "/",
+    url: "/home",
   },
   {
     id: 2,
@@ -20,5 +20,10 @@ export const links = [
     id: 4,
     text: "Contact",
     url: "/contact",
+  },
+  {
+    id: 5,
+    text: "Logout",
+    url: "/",
   },
 ];
