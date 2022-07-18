@@ -80,5 +80,5 @@ function Form() {
     </div>
   );
 }
-
-export default Form;
+//w3collective.com/react-authentication-firebase/
+https: export default Form;
