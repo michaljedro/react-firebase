@@ -6,7 +6,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-function Form() {
+function Form({ logout }) {
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,7 +22,7 @@ function Form() {
     setPasswordError("");
   };
   const handleLogin = (e) => {
-    clearInputs();
+    clearErrors();
     e.preventDefault();
     signInWithEmailAndPassword(email, password).catch((error) => {
       switch (error.code) {
@@ -75,10 +75,12 @@ function Form() {
         <input type="email" name="email" placeholder="Email" />
         <label>Password</label>
         <input type="password" name="password" placeholder="Password" />
-        <button type="submit">Submit</button>
+        <button type="submit" onSubmit={logout}>
+          Submit
+        </button>
       </form>
     </div>
   );
 }
 //w3collective.com/react-authentication-firebase/
-https: export default Form;
+export default Form;
