@@ -6,7 +6,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-function Form({ logout }) {
+function Form() {
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,7 +37,7 @@ function Form({ logout }) {
       }
     });
   };
-  const handleSignup = (e) => {
+  const handleSignup = () => {
     clearErrors();
     createUserWithEmailAndPassword(email, password).catch((error) => {
       switch (error.code) {
@@ -68,18 +68,46 @@ function Form({ logout }) {
   //   authListener();
   // }, []);
   return (
-    <div>
-      <h1>Sign Up</h1>
-      <form>
-        <label>Email</label>
-        <input type="email" name="email" placeholder="Email" />
+    <section className="login">
+      <div className="loginContainer">
+        <label>Username</label>
+        <input
+          type="text"
+          autoFocus
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <p className="errorMsg">{emailError}</p>
         <label>Password</label>
-        <input type="password" name="password" placeholder="Password" />
-        <button type="submit" onSubmit={logout}>
-          Submit
-        </button>
-      </form>
-    </div>
+        <input
+          type="password"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <p className="errorMsg">{passwordError}</p>
+        <div className="btnContainer">
+          {hasAccount ? (
+            <>
+              <button onClick={handleLogin}>Sing In</button>
+              <p>
+                Don't have an account ?{" "}
+                <span onClick={() => setHasAccount(!hasAccount)}>Sign up</span>
+              </p>
+            </>
+          ) : (
+            <>
+              <button onClick={handleSignup}>Sign up</button>
+              <p>
+                Have an account?{" "}
+                <span onClick={() => setHasAccount(!hasAccount)}>Sign in</span>{" "}
+              </p>
+            </>
+          )}
+        </div>
+      </div>
+    </section>
   );
 }
 //w3collective.com/react-authentication-firebase/

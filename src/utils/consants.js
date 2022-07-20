@@ -24,6 +24,6 @@ export const links = [
   {
     id: 5,
     text: "Logout",
-    url: "/",
+    url: "/form",
   },
 ];

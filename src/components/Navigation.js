@@ -3,7 +3,7 @@ import { Nav, Item, linkStyle } from "../styles/Navigation.styled";
 import { links } from "../utils/consants";
 import { Link } from "react-router-dom";
 
-function Navigation() {
+function Navigation({ handleLogout }) {
   return (
     <Nav>
       {links.map((link) => {
@@ -16,6 +16,7 @@ function Navigation() {
           </Item>
         );
       })}
+      <button onClick={handleLogout}>Logout</button>
     </Nav>
   );
 }

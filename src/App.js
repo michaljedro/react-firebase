@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import GlobalStyles from "./styles/Global";
+// import GlobalStyles from "./styles/Global";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -18,26 +18,29 @@ const theme = {
   mobile: "768px",
 };
 function App() {
-  const [logout, setLogout] = useState(true);
-  const [value, setValue] = useState(true);
-  const handleLogout = () => {
+  const [logout, setLogout] = useState(false);
+  const handleLog = () => {
     console.log(logout);
     setLogout(!logout);
   };
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      {value ? (
-        <Form logout={handleLogout} />
+      {/* <GlobalStyles /> */}
+      {logout ? (
+        // <Router>
+        //   <Routes>
+        //     <Route path="/form" element={<Form />} />
+        //   </Routes>
+        // </Router>
+        <Form />
       ) : (
         <Router>
-          <Navigation />
+          <Navigation handleLogout={handleLog} />
           <Routes>
             <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/addArticle" element={<AddArticle />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/" element={<Form />} />
           </Routes>
         </Router>
       )}
