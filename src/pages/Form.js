@@ -6,7 +6,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-function Form() {
+function Form({ handleLog }) {
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -90,7 +90,7 @@ function Form() {
         <div className="btnContainer">
           {hasAccount ? (
             <>
-              <button onClick={handleLogin}>Sing In</button>
+              <button onClick={{ handleLogin, handleLog }}>Sing In</button>
               <p>
                 Don't have an account ?{" "}
                 <span onClick={() => setHasAccount(!hasAccount)}>Sign up</span>
@@ -98,7 +98,7 @@ function Form() {
             </>
           ) : (
             <>
-              <button onClick={handleSignup}>Sign up</button>
+              <button onClick={{ handleSignup, handleLog }}>Sign up</button>
               <p>
                 Have an account?{" "}
                 <span onClick={() => setHasAccount(!hasAccount)}>Sign in</span>{" "}

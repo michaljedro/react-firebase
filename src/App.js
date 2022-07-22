@@ -18,7 +18,7 @@ const theme = {
   mobile: "768px",
 };
 function App() {
-  const [logout, setLogout] = useState(false);
+  const [logout, setLogout] = useState(true);
   const handleLog = () => {
     console.log(logout);
     setLogout(!logout);
@@ -32,7 +32,7 @@ function App() {
         //     <Route path="/form" element={<Form />} />
         //   </Routes>
         // </Router>
-        <Form />
+        <Form handleLog={handleLog} />
       ) : (
         <Router>
           <Navigation handleLogout={handleLog} />
