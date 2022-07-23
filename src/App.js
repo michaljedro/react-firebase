@@ -25,36 +25,22 @@ function App() {
   };
   return (
     <ThemeProvider theme={theme}>
-      {/* <GlobalStyles /> */}
-      {logout ? (
-        // <Router>
-        //   <Routes>
-        //     <Route path="/form" element={<Form />} />
-        //   </Routes>
-        // </Router>
-        <Form handleLog={handleLog} />
-      ) : (
-        <Router>
-          <Navigation handleLogout={handleLog} />
-          <Routes>
-            <Route path="/home" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/addArticle" element={<AddArticle />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </Router>
-      )}
-      {/* <Form /> */}
-      {/* <Login>Sing Up</Login> */}
-      {/* <Router>
-        <Navigation />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/addArticle" element={<AddArticle />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </Router> */}
+      <Router>
+        {/* <GlobalStyles /> */}
+        {logout ? (
+          <Form handleLog={handleLog} />
+        ) : (
+          <>
+            <Navigation handleLogout={handleLog} />
+            <Routes>
+              <Route path="/home" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/addArticle" element={<AddArticle />} />
+              <Route path="/contact" element={<Contact />} />
+            </Routes>
+          </>
+        )}
+      </Router>
     </ThemeProvider>
   );
 }

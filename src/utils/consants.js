@@ -21,9 +21,4 @@ export const links = [
     text: "Contact",
     url: "/contact",
   },
-  {
-    id: 5,
-    text: "Logout",
-    url: "/form",
-  },
 ];

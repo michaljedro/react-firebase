@@ -91,9 +91,9 @@ function Form({ handleLog }) {
             <>
               {/* <button onClick={{ handleLogin, handleLog }}>Sing In</button> */}
               <button
-                onClick={(props) => {
+                onClick={() => {
                   handleLogin();
-                  props.handleLog();
+                  handleLog();
                 }}
               >
                 Sign in
