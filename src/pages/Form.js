@@ -21,9 +21,8 @@ function Form({ handleLog }) {
     setEmailError("");
     setPasswordError("");
   };
-  const handleLogin = (e) => {
+  const handleLogin = () => {
     clearErrors();
-    e.preventDefault();
     signInWithEmailAndPassword(email, password).catch((error) => {
       switch (error.code) {
         case "auth/invalid-email":
@@ -90,7 +89,15 @@ function Form({ handleLog }) {
         <div className="btnContainer">
           {hasAccount ? (
             <>
-              <button onClick={{ handleLogin, handleLog }}>Sing In</button>
+              {/* <button onClick={{ handleLogin, handleLog }}>Sing In</button> */}
+              <button
+                onClick={(props) => {
+                  handleLogin();
+                  props.handleLog();
+                }}
+              >
+                Sign in
+              </button>
               <p>
                 Don't have an account ?{" "}
                 <span onClick={() => setHasAccount(!hasAccount)}>Sign up</span>
@@ -98,7 +105,15 @@ function Form({ handleLog }) {
             </>
           ) : (
             <>
-              <button onClick={{ handleSignup, handleLog }}>Sign up</button>
+              {/* <button onClick={{ handleSignup, handleLog }}>Sign up</button> */}
+              <button
+                onClick={() => {
+                  handleLogin();
+                  handleLog();
+                }}
+              >
+                Sign up
+              </button>
               <p>
                 Have an account?{" "}
                 <span onClick={() => setHasAccount(!hasAccount)}>Sign in</span>{" "}
